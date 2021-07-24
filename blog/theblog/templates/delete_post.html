@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+ {% block title %}
+   Editing Post
+ {% endblock%}
+{% block content %}
+<h1>Delete Post </h1>
+<form method="POST">
+    {% csrf_token %}
+    <!-- {{ form.as_p }} -->
+    <strong>Are you sure?</strong><br/>
+    <button>Delete</button>
+{% endblock %}

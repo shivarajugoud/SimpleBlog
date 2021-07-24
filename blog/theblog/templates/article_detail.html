@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+    {% block title %}
+    {{ post.title }}
+    {% endblock%}
+{% block content %}
+<h1> Post </h1>
+<small>
+  By:{{ post.author}} - {{ post.published_date }}
+</small>
+<!-- <ul>
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"> -->
+          <!-- <a class="nav-link" href="{% url 'editpost' post.pk %}">Edit-Post</a> <a class="nav-link" href="{% url 'deletepost' post.pk %}">Delete Post</a> -->
+        <!-- </li>
+      </ul>
+<ul> -->
+<li>{{post.title}}- {{ post.author.name}} <br/>
+    {{ post.body }}</li>
+</ul>
+<br><br/>
+<br/><a href="{% url 'home' %}" class="btn btn-dark">Back</a>
+<br><br/>
+<hr>
+<br/>
+<form action="{% url 'like_post' post.pk %}"
+ method = "POST">
+{% csrf_token %}
+{% if user.is_authenticated %}
+{% if liked %}
+<button type="submit", name="post_id", value="{{ post.id }}",class="btn btn-danger
+ btn-sm ">UnLike</button>
+ {% else %}
+ <button type="submit", name="post_id", value="{{ post.id }}",class="btn btn-primary
+ btn-sm ">Like</button>
+ {% endif %}
+ {% else %}
+<a href="{% url 'login' %}">Login</a>to Like
+{% endif %}
+- {{ post.total_likes }} Likes
+</form>
+
+{% endblock %}
